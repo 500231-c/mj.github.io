@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechNote · 技术博客</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Canvas 背景：鼠标跟随光斑 -->
+  <canvas id="aurora"></canvas>
+  <!-- Canvas 背景：气泡 -->
+  <canvas id="bubbles"></canvas>
+
+  <!-- 阅读进度条 -->
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <!-- 背景漂浮装饰（换成清新风） -->
+  <div class="floaties" aria-hidden="true">
+    <span class="floaty f1">🌿</span>
+    <span class="floaty f2">🍃</span>
+    <span class="floaty f3">☀️</span>
+    <span class="floaty f4">🌼</span>
+    <span class="floaty f5">🦋</span>
+    <span class="floaty f6">☁️</span>
+  </div>
+
+  <!-- 顶部导航 -->
+  <header class="header">
+    <div class="container nav">
+      <a href="#" class="logo" data-page="home">
+        <span class="logo-mark">◆</span>
+        <span class="logo-text">TechNote</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#" data-page="home"><span class="nav-icon">🏠</span>首页</a>
+        <a href="#" data-page="archive"><span class="nav-icon">🗂️</span>归档</a>
+        <a href="#" data-page="tags"><span class="nav-icon">🏷️</span>标签</a>
+        <a href="#" data-page="about"><span class="nav-icon">👋</span>关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="container main">
+    <div class="layout">
+
+      <!-- 左：页面内容 -->
+      <div class="content">
+
+        <!-- ============ 首页 ============ -->
+        <section id="page-home" class="page active">
+
+          <!-- Hero 区域（升级：欢迎语 + 动态数字 + 标签） -->
+          <div class="hero">
+            <div class="hero-badge">☀️ Good to see you here</div>
+            <h1 class="hero-title">记录技术，分享思考</h1>
+            <p class="hero-desc">一个关于前端、工程化与成长的个人博客 — 每一次编码，都是一次自我迭代。</p>
+            <div class="hero-stats">
+              <div class="hero-stat"><span class="stat-num" data-target="5">0</span><span class="stat-label">篇文章</span></div>
+              <div class="hero-stat"><span class="stat-num" data-target="4">0</span><span class="stat-label">类标签</span></div>
+              <div class="hero-stat"><span class="stat-num" data-target="2026">0</span><span class="stat-label">年启程</span></div>
+            </div>
+            <div class="hero-tags">
+              <span class="hero-tag">#前端开发</span>
+              <span class="hero-tag">#工程化</span>
+              <span class="hero-tag">#读书笔记</span>
+              <span class="hero-tag">#日常碎碎念</span>
+            </div>
+          </div>
+
+          <!-- 筛选栏 -->
+          <div class="filters">
+            <div class="filter-group">
+              <span class="filter-label">分类</span>
+              <button class="filter-btn active" data-filter-type="category" data-filter="all">全部</button>
+              <button class="filter-btn" data-filter-type="category" data-filter="前端">🎨 前端</button>
+              <button class="filter-btn" data-filter-type="category" data-filter="工程化">⚙️ 工程化</button>
+              <button class="filter-btn" data-filter-type="category" data-filter="随笔">📝 随笔</button>
+            </div>
+            <div class="filter-group">
+              <span class="filter-label">标签</span>
+              <button class="filter-btn active" data-filter-type="tag" data-filter="all">全部</button>
+              <button class="filter-btn" data-filter-type="tag" data-filter="JavaScript">JavaScript</button>
+              <button class="filter-btn" data-filter-type="tag" data-filter="CSS">CSS</button>
+              <button class="filter-btn" data-filter-type="tag" data-filter="Vite">Vite</button>
+              <button class="filter-btn" data-filter-type="tag" data-filter="Node">Node</button>
+            </div>
+          </div>
+
+          <!-- 文章列表 -->
+          <div id="article-list" class="article-list">
+            <!-- JS 动态渲染 -->
+          </div>
+
+        </section>
+
+        <!-- ============ 归档页 ============ -->
+        <section id="page-archive" class="page">
+          <div class="page-head">
+            <h1>🗂️ 文章归档</h1>
+            <p>按年份整理的全部文章</p>
+          </div>
+          <div id="archive-list">
+            <!-- JS 动态渲染 -->
+          </div>
+        </section>
+
+        <!-- ============ 标签页 ============ -->
+        <section id="page-tags" class="page">
+          <div class="page-head">
+            <h1>🏷️ 标签云</h1>
+            <p>点击任意标签，快速筛选相关文章</p>
+          </div>
+          <div id="tag-cloud" class="tag-cloud-page">
+            <!-- JS 动态渲染 -->
+          </div>
+        </section>
+
+        <!-- ============ 文章详情 ============ -->
+        <section id="page-detail" class="page">
+          <button class="back-btn" data-page="home">← 返回列表</button>
+          <article id="article-detail" class="article-detail">
+            <!-- JS 动态渲染 -->
+          </article>
+        </section>
+
+        <!-- ============ 关于页面 ============ -->
+        <section id="page-about" class="page">
+          <div class="about">
+            <h1 class="about-title">关于我 👋</h1>
+            <p class="about-intro">你好呀～我是一名前端开发者，热爱构建用户体验良好的 Web 应用，也喜欢把学到的东西写下来 (˶ᵔᵕᵔ˶)</p>
+            <h2>🛠️ 技能栈</h2>
+            <ul class="skill-list">
+              <li>HTML / CSS / JavaScript / TypeScript</li>
+              <li>React / Vue / 原生框架</li>
+              <li>Vite / Webpack / 工程化工具</li>
+              <li>Node.js / Express</li>
+            </ul>
+            <h2>📮 联系方式</h2>
+            <ul class="contact-list">
+              <li>📧 Email: your@email.com</li>
+              <li>🐙 GitHub: github.com/yourname</li>
+              <li>✍️ 博客: technote.dev</li>
+            </ul>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- 右：信息侧栏 -->
+      <aside class="sidebar">
+
+        <!-- 博主卡片 -->
+        <div class="side-card profile-card">
+          <div class="profile-avatar">🐱</div>
+          <div class="profile-name">TechNote</div>
+          <p class="profile-bio">记录技术，分享思考<br>前端 / 工程化 / 成长</p>
+          <div class="profile-stats" id="profile-stats"></div>
+        </div>
+
+        <!-- 标签云 -->
+        <div class="side-card">
+          <h3 class="side-title">🏷️ 标签云</h3>
+          <div id="side-tags"></div>
+        </div>
+
+        <!-- 最新文章 -->
+        <div class="side-card">
+          <h3 class="side-title">📌 最新文章</h3>
+          <ul class="side-latest" id="side-latest"></ul>
+        </div>
+
+        <!-- 友链 / 推荐 -->
+        <div class="side-card">
+          <h3 class="side-title">🔗 一起加油</h3>
+          <ul class="side-friends" id="side-friends"></ul>
+        </div>
+
+        <!-- 小工具卡片 -->
+        <div class="side-card tool-card">
+          <div class="tool-icon">🌿</div>
+          <div class="tool-info">
+            <div class="tool-title">今日份打气</div>
+            <div class="tool-desc" id="tool-quote">点击获取今日份小确幸 ✨</div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- 回到顶部 -->
+  <button class="to-top" id="to-top" title="回到顶部">🐾</button>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 TechNote · Powered by HTML / CSS / JS · 用 ❤️ 构建</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
